@@ -2,10 +2,8 @@ name: Ruby
 
 on:
   push:
-    branches:
-      - main
-
-  pull_request:
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -25,3 +23,10 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: bundle exec rake
+    - name: Build
+      run: gem build baran.gemspec
+    - name: Publish
+      uses: rubygems/action@v2
+      with:
+        api_key: ${{ secrets.RUBYGEMS_API_KEY }}
+        gem: baran-*.gem
