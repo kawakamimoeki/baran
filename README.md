@@ -32,6 +32,7 @@ splitter = Baran::CharacterTextSplitter.new(
     separator: "\n\n"
 )
 splitter.chunks(text)
+# => [{ cursor: 0, text: "..." }, ...]
 ```
 
 ### Recursive Character Text Splitter
@@ -43,6 +44,7 @@ splitter = Baran::RecursiveCharacterTextSplitter.new(
     separators: ["\nn", "\n", " ", ""]
 )
 splitter.chunks(text)
+# => [{ cursor: 0, text: "..." }, ...]
 ```
 
 ### Markdown Text Splitter
@@ -52,6 +54,7 @@ Splitting by the Markdown descriptions.
 ```ruby
 splitter = Baran::MarkdownSplitter.new
 splitter.chunks(markdown)
+# => [{ cursor: 0, text: "..." }, ...]
 ```
 
 Split with the following priority.
