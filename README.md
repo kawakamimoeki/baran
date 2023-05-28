@@ -41,7 +41,7 @@ Splitting by the specified characters recursively.
 
 ```ruby
 splitter = Baran::RecursiveCharacterTextSplitter.new(
-    separators: ["\nn", "\n", " ", ""]
+    separators: ["\n\n", "\n", " ", ""]
 )
 splitter.chunks(text)
 # => [{ cursor: 0, text: "..." }, ...]
