@@ -2,6 +2,8 @@
 
 Text Splitter for Large Language Model datasets.
 
+To avoid token constraints and improve the accuracy of vector search in the Large Language Model, it is necessary to divide the document. This gem supports splitting the text in the specified manner.
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
