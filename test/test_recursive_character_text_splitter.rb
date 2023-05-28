@@ -8,7 +8,7 @@ class TestRecursiveCharacterTextSplitter < MiniTest::Unit::TestCase
     @splitter = Baran::RecursiveCharacterTextSplitter.new(chunk_size: 7, chunk_overlap: 5)
   end
 
-  def chunks
+  def test_chunks
     chunks = @splitter.chunks("Hello, world!\n\nHello, world!\n\nHello, world!")
 
     assert_equal(chunks.length, 6)
