@@ -24,39 +24,33 @@ module Baran
       chunks
     end
 
-    def join_docs(docs, separator)
-      text = docs.join(separator).strip
+    def joined(items, separator)
+      text = items.join(separator).strip
       text.empty? ? nil : text
     end
 
     def merged(splits, separator)
-      docs = [] # Array of strings
-      current_doc = [] # Array of strings
+      results = [] # Array of strings
+      current_splits = [] # Array of strings
       total = 0
 
-      splits.each do |d|
-        len = d.length
+      splits.each do |split|
+        if total + split.length >= chunk_size && current_splits.length.positive?
+          results << joined(current_splits, separator)
 
-        if total + len >= @chunk_size
-          unless current_doc.empty?
-            doc = join_docs(current_doc, separator)
-            docs.push(doc) unless doc.nil?
-
-            while total > @chunk_overlap || (total + len > @chunk_size && total.positive?)
-              total -= current_doc.first.length
-              current_doc.shift
-            end
+          while total > chunk_overlap || (total + split.length > chunk_size && total.positive?)
+            total -= current_splits.first.length
+            current_splits.shift
           end
         end
 
-        current_doc.push(d)
-        total += len
+        current_splits << split
+        total += split.length
       end
 
-      doc = join_docs(current_doc, separator)
-      docs.push(doc) unless doc.nil?
+      results << joined(current_splits, separator)
 
-      docs
+      results
     end
   end
 end

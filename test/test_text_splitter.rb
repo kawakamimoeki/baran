@@ -55,10 +55,10 @@ class TestTextSplitter < Minitest::Test
     assert_equal 'text', documents[0][:text]
   end
 
-  def test_join_docs
-    docs = ['one', 'two', 'three']
+  def test_joined
+    items = ['one', 'two', 'three']
     separator = ' '
-    joined_text = @test_splitter.join_docs(docs, separator)
+    joined_text = @test_splitter.joined(items, separator)
 
     assert_equal 'one two three', joined_text
   end

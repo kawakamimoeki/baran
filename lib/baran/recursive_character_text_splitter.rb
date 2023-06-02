@@ -6,46 +6,38 @@ module Baran
 
     def initialize(chunk_size: 1024, chunk_overlap: 64, separators: nil)
       super(chunk_size: chunk_size, chunk_overlap: chunk_overlap)
-      @separators = separators || ["\n\n", "\n", " ", ""]
+      @separators = separators || ["\n\n", "\n", " "]
     end
 
     def splitted(text)
-      final_chunks = []
+      results = []
+      good_splits = []
+      separator = ''
 
-      separator = @separators.last
-      @separators.each do |s|
-        if s.empty?
-          separator = s
-          break
-        elsif text.include?(s)
+      separators.each do |s|
+        if text.include?(s)
           separator = s
           break
         end
       end
 
-      splits = separator.empty? ? text.chars : text.split(separator)
-
-      good_splits = []
-      splits.each do |s|
-        if s.length < @chunk_size
+      text.split(separator).each do |s|
+        if s.length < chunk_size
           good_splits << s
         else
-          unless good_splits.empty?
-            merged_text = merged(good_splits, separator)
-            final_chunks.concat(merged_text)
+          if good_splits.length.positive?
+            results += merged(good_splits, separator)
             good_splits.clear
           end
-          other_info = splitted(s)
-          final_chunks.concat(other_info)
+          results += splitted(s)
         end
       end
 
-      unless good_splits.empty?
-        merged_text = merged(good_splits, separator)
-        final_chunks.concat(merged_text)
+      if good_splits.length.positive?
+        results += merged(good_splits, separator)
       end
 
-      final_chunks
+      results
     end
   end
 end
