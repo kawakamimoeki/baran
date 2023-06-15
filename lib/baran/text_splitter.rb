@@ -38,7 +38,7 @@ module Baran
         if total + split.length >= chunk_size && current_splits.length.positive?
           results << joined(current_splits, separator)
 
-          while total > chunk_overlap || (total + split.length > chunk_size && total.positive?)
+          while total > chunk_overlap || (total + split.length >= chunk_size && total.positive?)
             total -= current_splits.first.length
             current_splits.shift
           end
