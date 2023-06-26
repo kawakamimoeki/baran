@@ -1,5 +1,9 @@
 # Baran
 
+![v](https://badgen.net/rubygems/v/baran)
+![dt](https://badgen.net/rubygems/dt/baran)
+![license](https://badgen.net/github/license/moekidev/baran)
+
 Text Splitter for Large Language Model datasets.
 
 To avoid token constraints and improve the accuracy of vector search in the Large Language Model, it is necessary to divide the document. This gem supports splitting the text in the specified manner.
