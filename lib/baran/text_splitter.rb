@@ -1,3 +1,5 @@
+require 'logger'
+
 module Baran
   class TextSplitter
     attr_accessor :chunk_size, :chunk_overlap
@@ -46,6 +48,7 @@ module Baran
 
         current_splits << split
         total += split.length
+        Logger.new(STDOUT).warn("Created a chunk of size #{total}, which is longer than the specified #{@chunk_size}") if total > @chunk_size
       end
 
       results << joined(current_splits, separator)
