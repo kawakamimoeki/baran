@@ -18,7 +18,7 @@ module Baran
       cursor = 0
       chunks = []
 
-      splitted(text).each do |chunk|
+      splitted(text).compact.each do |chunk|
         chunks << { text: chunk, cursor: cursor }
         cursor += chunk.length
       end
