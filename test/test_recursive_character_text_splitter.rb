@@ -13,4 +13,11 @@ class TestRecursiveCharacterTextSplitter < MiniTest::Unit::TestCase
 
     assert_equal(chunks.length, 6)
   end
+
+
+  def test_empty_chunks
+    chunks = @splitter.chunks("\n\nHello, world!\n\nHello, world!\n\nHello, world!")
+
+    assert_equal(chunks.length, 6)
+  end
 end
