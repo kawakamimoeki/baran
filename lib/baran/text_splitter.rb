@@ -14,12 +14,14 @@ module Baran
       raise NotImplementedError, "splitted method should be implemented in a subclass"
     end
 
-    def chunks(text)
+    def chunks(text, metadata: nil)
       cursor = 0
       chunks = []
 
       splitted(text).compact.each do |chunk|
-        chunks << { text: chunk, cursor: cursor }
+        chunk = { text: chunk, cursor: cursor }
+        chunk[:metadata] = metadata if metadata
+        chunks << chunk
         cursor += chunk.length
       end
 
