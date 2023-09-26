@@ -55,7 +55,7 @@ class TestTextSplitter < Minitest::Test
     assert_equal 'text', documents[0][:text]
   end
 
-  def test_chunks_with_metadat
+  def test_chunks_with_metadata
     text = 'text one'
     metadata = { page: 1 }
     documents = @test_splitter.chunks(text, metadata: metadata)
