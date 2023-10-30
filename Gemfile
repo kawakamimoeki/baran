@@ -7,4 +7,4 @@ gemspec
 
 gem "minitest", "~> 5.21"
 
-gem "rake", "~> 13.0"
+gem "rake", "~> 13.1"
