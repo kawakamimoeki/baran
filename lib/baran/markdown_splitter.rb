@@ -3,7 +3,7 @@ require_relative './recursive_character_text_splitter'
 module Baran
   class MarkdownSplitter < RecursiveCharacterTextSplitter
     def initialize(chunk_size: 1024, chunk_overlap: 64)
-      @separators = [
+      separators = [
         "\n# ", # h1
         "\n## ", # h2
         "\n### ", # h3
@@ -19,7 +19,7 @@ module Baran
         " ", # space
         "" # empty
       ]
-      super(chunk_size: chunk_size, chunk_overlap: chunk_overlap)
+      super(chunk_size: chunk_size, chunk_overlap: chunk_overlap, separators: separators)
     end
   end
 end
