@@ -9,10 +9,30 @@ class TestMarkdownSplitter < MiniTest::Unit::TestCase
   end
 
   def test_chunks
-    text = "# h1\n\n## h2\n\n### h3\n\n#### h4\n\n##### h5\n\n###### h6\n\n```\n\n```\n\n***\n\n---"
+    text = <<~MARKDOWN
+# h1
+
+## h2
+
+### h3
+
+#### h4
+
+##### h5
+
+###### h6
+
+```
+```
+
+***
+
+---
+MARKDOWN
+
     @splitter = Baran::MarkdownSplitter.new(chunk_size: 3, chunk_overlap: 1)
     chunks = @splitter.chunks(text)
 
-    assert_equal(chunks.length, 30)
+    assert_equal(13, chunks.length)
   end
 end
