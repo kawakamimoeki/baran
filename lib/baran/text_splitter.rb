@@ -22,7 +22,7 @@ module Baran
         chunk = { text: chunk, cursor: cursor }
         chunk[:metadata] = metadata if metadata
         chunks << chunk
-        cursor += chunk.length
+        cursor += chunk[:text].length
       end
 
       chunks
