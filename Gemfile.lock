@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    baran (0.1.10)
+    baran (0.1.11)
 
 GEM
   remote: https://rubygems.org/
