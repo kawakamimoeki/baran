@@ -53,6 +53,7 @@ class TestTextSplitter < Minitest::Test
 
     assert_equal 2, documents.size
     assert_equal 'text', documents[0][:text]
+    assert_equal 4, documents[1][:cursor]
   end
 
   def test_chunks_with_metadata
