@@ -6,10 +6,7 @@ MiniTest::Unit.autorun
 class TestSentenceTextSplitter < MiniTest::Unit::TestCase
   def setup
     @splitter = Baran::SentenceTextSplitter.new(chunk_size: 10, chunk_overlap: 5)
-  end
-
-  def test_chunks
-    story = <<~TEXT
+    @story = <<~TEXT
       Hack and jill
         went up the hill to fetch
         a pail of water.  Jack fell
@@ -19,23 +16,36 @@ class TestSentenceTextSplitter < MiniTest::Unit::TestCase
         No, the water was splashed on Bo Peep.
     TEXT
 
-    chunks = @splitter.chunks(story)
-
-    sentences = chunks
-                  .map  { |chunk| 
-                          chunk[:text]
-                            .gsub(/\s+/, ' ')
-                            .strip 
-                        }
-
-    expected  = [
-      "Hack and jill went up the hill to fetch a pail of water.", 
-      "Jack fell down and broke his crown and Jill came tumbling after.", 
-      "The pail went flying!", 
-      "Was the water spilled?", 
+    @expected =[
+      "Hack and jill went up the hill to fetch a pail of water.",
+      "Jack fell down and broke his crown and Jill came tumbling after.",
+      "The pail went flying!",
+      "Was the water spilled?",
       "No, the water was splashed on Bo Peep."
     ]
+  end
 
-    assert_equal(sentences, expected)
+  def test_chunks
+    chunks = @splitter.chunks(@story)
+    sentences = format_chunks(chunks)
+    assert_equal(sentences, @expected)
+  end
+
+  def test_chunks_without_trailing_whitespace
+    chunks = @splitter.chunks(@story.strip)
+    sentences = format_chunks(chunks)
+    assert_equal(sentences, @expected)
+  end
+
+
+  private
+
+  def format_chunks(chunks)
+    chunks
+      .map  { |chunk|
+              chunk[:text]
+                .gsub(/\s+/, ' ')
+                .strip
+            }
   end
 end

@@ -8,7 +8,7 @@ module Baran
 
     def splitted(text)
       # Use a regex to split text based on the specified sentence-ending characters followed by whitespace
-      text.scan(/[^.!?]+[.!?]+(?:\s+)/).map(&:strip)
+      text.scan(/[^.!?]+[.!?]+(?:\s+|\z)/).map(&:strip)
     end
   end
 end
